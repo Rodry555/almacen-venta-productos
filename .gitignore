@@ -1,0 +1,11 @@
+# Credenciales y configuración local
+.env
+
+# Dependencias y subidas temporales
+/vendor/
+/uploads/*
+!/uploads/.gitkeep
+
+# Logs y sistema
+*.log
+.DS_Store

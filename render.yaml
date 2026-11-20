@@ -1,0 +1,31 @@
+# Render Blueprint. Los secretos se rellenan en el dashboard (sync: false).
+services:
+  - type: web
+    name: almacen-venta
+    runtime: docker
+    plan: free
+    envVars:
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "4000"
+      - key: DB_NAME
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASS
+        sync: false
+      - key: DB_SSL_CA_B64
+        sync: false
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_URL
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

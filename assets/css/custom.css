@@ -1,0 +1,9 @@
+/* Ajustes mínimos que Tailwind CDN no cubre cómodamente. */
+img { object-position: center; }
+.dataTables_wrapper { font-size: .875rem; }
+.dataTables_wrapper .dt-search input,
+.dataTables_wrapper .dt-length select {
+    border: 1px solid #cbd5e1;
+    border-radius: .5rem;
+    padding: .4rem .6rem;
+}
