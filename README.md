@@ -52,13 +52,14 @@ con 6 o 7), fecha de retiro y notas opcionales.
 
 `database/seed.sql` reemplaza los datos de ejemplo por **8 categorías** (Bebidas & Licores,
 Despensa & Abarrotes, Lácteos, Café/Té/Mate, Limpieza del Hogar, Congelados, Bebés y Mascotas)
-y **60 productos** cargados solo con su **nombre** y su categoría.
+y **60 productos** con nombre, categoría y **precio en bolivianos** (referencia: Fidalga,
+Santa Cruz de la Sierra, noviembre de 2026).
 
-Todavía no hay fotos ni precios reales: las tarjetas muestran un contenedor placeholder con el
-icono de la categoría y el texto «A consultar» en lugar de un `Bs 0.00` engañoso. En la base de datos
-`price = 0.00` y `stock = 20` son valores provisionales para que el flujo de reservas siga
-funcionando; puedes completarlos desde el panel de administración. Las imágenes se pueden subir
-después desde `/admin/producto-form.php` (Cloudinary).
+Todavía no hay fotos: las tarjetas muestran un contenedor placeholder con el icono de la
+categoría. El texto «A consultar» aparece solo si un producto queda sin precio (`price = 0`).
+`stock = 20` es un valor provisional para que el flujo de reservas siga funcionando; puedes
+ajustarlo desde `/admin/productos.php`. Las imágenes se pueden subir después desde
+`/admin/producto-form.php` (Cloudinary).
 
 ### Pruebas smoke
 
@@ -106,6 +107,8 @@ producto (en edición se muestra de solo lectura).
    imágenes antiguos, y vuelve a cargar las 8 categorías y los 60 productos. Haz antes una copia de seguridad:
    esa migración es destructiva (también elimina las reservas antiguas).
    Para dejar de pedir el email en las reservas, ejecuta también `database/migrate-reservas.sql`.
+   Si el catálogo ya estaba cargado, ejecuta `database/migrate-precios.sql` para actualizar
+   únicamente los precios de los 60 productos (no modifica stock, reservas ni imágenes).
 2. Crea el servicio en **Render** desde este repo con el Blueprint `render.yaml`. Render no tiene
    runtime PHP nativo, por eso se usa el `Dockerfile` incluido.
 3. En el dashboard de Render rellena **una sola variable**:

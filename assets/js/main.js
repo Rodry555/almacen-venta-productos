@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /**
- * Los productos se cargaron solo con nombre y categoría (precio = 0).
- * Mientras no haya precio real, mostrar "A consultar" en vez de "Bs 0.00".
+ * Precios reales cargados en la BD: formato siempre en bolivianos.
+ * Si price = 0 (producto aún sin precio), mostrar "A consultar" en vez de "Bs 0.00".
  */
 window.formatoPrecio = function (precio) {
     const numero = Number(precio) || 0;
@@ -37,11 +37,15 @@ window.formatoPrecio = function (precio) {
 window.mensaje = function (texto, tipo = 'success') {
     if (typeof Toastify !== 'undefined') {
         const colores = { success: '#059669', warning: '#d97706', error: '#dc2626' };
+        // El header es sticky: colocar el toast debajo de él para no tapar el carrito.
+        const header = document.querySelector('header.sticky');
+        const offsetY = header ? Math.round(header.getBoundingClientRect().bottom) + 12 : 88;
         Toastify({
             text: texto,
             duration: 3000,
             gravity: 'top',
             position: 'right',
+            offset: { x: 0, y: offsetY },
             backgroundColor: colores[tipo] || colores.success,
             borderRadius: '12px',
         }).showToast();
