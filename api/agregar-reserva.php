@@ -19,7 +19,6 @@ if (!csrfValidar(csrfTokenPeticion())) {
 
 $body = leerJson();
 $nombre   = trim((string) ($body['customer_name'] ?? ''));
-$email    = trim((string) ($body['customer_email'] ?? ''));
 $telefono = trim((string) ($body['customer_phone'] ?? ''));
 $pickup   = trim((string) ($body['pickup_date'] ?? ''));
 $notas    = trim((string) ($body['notes'] ?? ''));
@@ -29,11 +28,9 @@ $errores = [];
 if (mb_strlen($nombre) < 3 || mb_strlen($nombre) > 255) {
     $errores[] = 'El nombre debe tener entre 3 y 255 caracteres.';
 }
-if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errores[] = 'El email no es válido.';
-}
-if (!preg_match('/^[0-9+\s\-()]{7,50}$/', $telefono)) {
-    $errores[] = 'El teléfono no es válido.';
+// Teléfono boliviano simple: 8 dígitos, empieza con 6 o 7.
+if (!preg_match('/^[67][0-9]{7}$/D', $telefono)) {
+    $errores[] = 'El teléfono debe tener 8 dígitos y empezar con 6 o 7.';
 }
 if (!esFechaFutura($pickup)) {
     $errores[] = 'La fecha de retiro debe ser hoy o posterior (YYYY-MM-DD).';
@@ -96,12 +93,11 @@ try {
 
     // 2) Cabecera de la reserva.
     $insReserva = $pdo->prepare(
-        "INSERT INTO reservations (customer_name, customer_email, customer_phone, pickup_date, notes, status)
-         VALUES (:nombre, :email, :telefono, :pickup, :notas, 'pending')"
+        "INSERT INTO reservations (customer_name, customer_phone, pickup_date, notes, status)
+         VALUES (:nombre, :telefono, :pickup, :notas, 'pending')"
     );
     $insReserva->execute([
         ':nombre'   => $nombre,
-        ':email'    => $email,
         ':telefono' => $telefono,
         ':pickup'   => $pickup,
         ':notas'    => $notas !== '' ? $notas : null,

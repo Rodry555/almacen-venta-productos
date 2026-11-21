@@ -34,8 +34,6 @@
                 <h4 class="text-white font-display font-bold text-sm uppercase tracking-widest mb-4">Ayuda</h4>
                 <ul class="space-y-3 text-sm">
                     <li><a class="hover:text-brand-300 transition" href="/index.php#como-funciona">Cómo reservar</a></li>
-                    <li><a class="hover:text-brand-300 transition" href="<?= e(WHATSAPP_ADMIN_URL) ?>" target="_blank" rel="noopener noreferrer">Escribir al admin</a></li>
-                    <li><a class="hover:text-brand-300 transition" href="/login.php">Acceso administrador</a></li>
                 </ul>
             </div>
 

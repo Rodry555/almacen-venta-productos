@@ -93,7 +93,6 @@ require_once __DIR__ . '/../includes/admin-header.php';
             </div>
             <dl class="grid gap-4 sm:grid-cols-2 text-sm">
                 <div><dt class="text-slate-400">Nombre</dt><dd class="font-semibold"><?= e($reserva['customer_name']) ?></dd></div>
-                <div><dt class="text-slate-400">Email</dt><dd><?= e($reserva['customer_email']) ?></dd></div>
                 <div><dt class="text-slate-400">Teléfono</dt><dd><?= e($reserva['customer_phone']) ?></dd></div>
                 <div><dt class="text-slate-400">Fecha de retiro</dt><dd class="font-semibold"><?= e($reserva['pickup_date']) ?></dd></div>
                 <div><dt class="text-slate-400">Creada</dt><dd><?= e($reserva['created_at']) ?></dd></div>
@@ -118,15 +117,15 @@ require_once __DIR__ . '/../includes/admin-header.php';
                                     </a>
                                 </td>
                                 <td class="p-2"><?= (int) $item['quantity'] ?></td>
-                                <td class="p-2">$<?= e(number_format((float) $item['price'], 2)) ?></td>
-                                <td class="p-2 font-semibold">$<?= e(number_format((int) $item['quantity'] * (float) $item['price'], 2)) ?></td>
+                                <td class="p-2">Bs <?= e(number_format((float) $item['price'], 2)) ?></td>
+                                <td class="p-2 font-semibold">Bs <?= e(number_format((int) $item['quantity'] * (float) $item['price'], 2)) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                     <tfoot>
                         <tr class="border-t-2 border-slate-200">
                             <td colspan="3" class="p-2 text-right font-bold">Total</td>
-                            <td class="p-2 font-bold text-emerald-600">$<?= e(number_format($total, 2)) ?></td>
+                            <td class="p-2 font-bold text-emerald-600">Bs <?= e(number_format($total, 2)) ?></td>
                         </tr>
                     </tfoot>
                 </table>

@@ -212,7 +212,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
         </label>
 
         <label class="block">
-            <span class="text-sm font-semibold">Precio *</span>
+            <span class="text-sm font-semibold">Precio (Bs) *</span>
             <input name="price" type="number" step="0.01" min="0" required
                    value="<?= e($producto['price']) ?>"
                    class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">

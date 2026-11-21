@@ -124,12 +124,12 @@ function flashLeer(): array
 
 /**
  * Precio para el catálogo público. Mientras no se cargue el precio real
- * (seed con price = 0.00) se muestra "A consultar" en lugar de un $0.00 engañoso.
+ * (seed con price = 0.00) se muestra "A consultar" en lugar de un Bs 0.00 engañoso.
  */
 function etiquetaPrecio($valor): string
 {
     $precio = (float) $valor;
-    return $precio > 0 ? '$' . number_format($precio, 2) : 'A consultar';
+    return $precio > 0 ? 'Bs ' . number_format($precio, 2) : 'A consultar';
 }
 
 /** Disponibilidad legible para el catálogo público. */

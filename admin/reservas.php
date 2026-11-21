@@ -9,7 +9,7 @@ if (!in_array($estado, $estadosValidos, true)) {
     $estado = '';
 }
 
-$sql = 'SELECT r.id, r.customer_name, r.customer_email, r.pickup_date, r.status, r.created_at,
+$sql = 'SELECT r.id, r.customer_name, r.customer_phone, r.pickup_date, r.status, r.created_at,
                (SELECT COUNT(*) FROM reservation_items ri WHERE ri.reservation_id = r.id) AS total_items,
                (SELECT COALESCE(SUM(ri.quantity * ri.price), 0) FROM reservation_items ri WHERE ri.reservation_id = r.id) AS total
         FROM reservations r';
@@ -75,7 +75,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
                     <td class="p-3 font-bold">#<?= (int) $r['id'] ?></td>
                     <td class="p-3">
                         <p class="font-semibold"><?= e($r['customer_name']) ?></p>
-                        <p class="text-xs text-slate-400"><?= e($r['customer_email']) ?></p>
+                        <p class="text-xs text-slate-400"><i class="fa-solid fa-phone mr-1"></i><?= e($r['customer_phone']) ?></p>
                     </td>
                     <td class="p-3 text-slate-500"><?= e($r['pickup_date']) ?></td>
                     <td class="p-3">
@@ -84,7 +84,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
                         </span>
                     </td>
                     <td class="p-3 text-slate-500"><?= (int) $r['total_items'] ?></td>
-                    <td class="p-3 font-semibold">$<?= e(number_format((float) $r['total'], 2)) ?></td>
+                    <td class="p-3 font-semibold">Bs <?= e(number_format((float) $r['total'], 2)) ?></td>
                     <td class="p-3 text-slate-400 text-xs"><?= e($r['created_at']) ?></td>
                     <td class="p-3">
                         <a href="/admin/reserva-detalle.php?id=<?= (int) $r['id'] ?>"

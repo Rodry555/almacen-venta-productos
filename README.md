@@ -45,6 +45,8 @@ docker compose up -d --build
 
 Productos y categorías se guardan con **formularios PHP clásicos** (POST a la misma página,
 validación en servidor, PRG con mensaje flash). Reservas, estados, stock y login usan la API JSON.
+El formulario de reserva ya no pide email: solo nombre, teléfono boliviano (8 dígitos que empiezan
+con 6 o 7), fecha de retiro y notas opcionales.
 
 ## Catálogo inicial
 
@@ -53,7 +55,7 @@ Despensa & Abarrotes, Lácteos, Café/Té/Mate, Limpieza del Hogar, Congelados, 
 y **60 productos** cargados solo con su **nombre** y su categoría.
 
 Todavía no hay fotos ni precios reales: las tarjetas muestran un contenedor placeholder con el
-icono de la categoría y el texto «A consultar» en lugar de un `$0.00` engañoso. En la base de datos
+icono de la categoría y el texto «A consultar» en lugar de un `Bs 0.00` engañoso. En la base de datos
 `price = 0.00` y `stock = 20` son valores provisionales para que el flujo de reservas siga
 funcionando; puedes completarlos desde el panel de administración. Las imágenes se pueden subir
 después desde `/admin/producto-form.php` (Cloudinary).
@@ -103,6 +105,7 @@ producto (en edición se muestra de solo lectura).
    `database/migrate-catalogo.sql`, que borra el catálogo, las reservas, los movimientos y las
    imágenes antiguos, y vuelve a cargar las 8 categorías y los 60 productos. Haz antes una copia de seguridad:
    esa migración es destructiva (también elimina las reservas antiguas).
+   Para dejar de pedir el email en las reservas, ejecuta también `database/migrate-reservas.sql`.
 2. Crea el servicio en **Render** desde este repo con el Blueprint `render.yaml`. Render no tiene
    runtime PHP nativo, por eso se usa el `Dockerfile` incluido.
 3. En el dashboard de Render rellena **una sola variable**:

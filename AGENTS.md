@@ -146,7 +146,7 @@ CREATE TABLE product_images (
 CREATE TABLE reservations (
   id INT AUTO_INCREMENT PRIMARY KEY,
   customer_name VARCHAR(255) NOT NULL,
-  customer_email VARCHAR(255) NOT NULL,
+  customer_email VARCHAR(255) NULL,  -- opcional; ya no se pide al reservar
   customer_phone VARCHAR(50) NOT NULL,
   pickup_date DATE NOT NULL,
   notes TEXT,
@@ -197,8 +197,7 @@ CREATE TABLE stock_movements (
 7. Puede ajustar cantidad o eliminar productos
 8. Click en "Reservar" → se abre formulario:
    - Nombre completo (requerido)
-   - Email (requerido, validado)
-   - Teléfono (requerido)
+   - Teléfono (requerido: 8 dígitos bolivianos, empieza con 6 o 7)
    - Fecha deseada de retiro (requerido, no puede ser pasado)
    - Notas/comentarios (opcional)
 9. Submit → POST a /api/agregar-reserva.php

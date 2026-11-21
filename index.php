@@ -82,7 +82,7 @@ include __DIR__ . '/includes/header.php';
         </div>
 
         <!-- Cifras reales del catálogo. -->
-        <div class="mt-16 grid grid-cols-2 gap-3 md:grid-cols-4" data-aos="fade-up">
+        <div class="mt-16 grid grid-cols-2 gap-3 lg:grid-cols-3" data-aos="fade-up">
             <div class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
                 <p class="font-display text-3xl font-extrabold text-white"><?= $totalProductos ?></p>
                 <p class="text-xs text-slate-300 mt-1">Productos en catálogo</p>
@@ -94,10 +94,6 @@ include __DIR__ . '/includes/header.php';
             <div class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
                 <p class="font-display text-3xl font-extrabold text-brand-300">100%</p>
                 <p class="text-xs text-slate-300 mt-1">Reserva previa</p>
-            </div>
-            <div class="rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
-                <p class="font-display text-3xl font-extrabold text-brand-300">$0</p>
-                <p class="text-xs text-slate-300 mt-1">Pagos online</p>
             </div>
         </div>
     </div>

@@ -84,15 +84,11 @@ include __DIR__ . '/../includes/header.php';
                        class="mt-2 w-full rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
             </label>
             <label class="block">
-                <span class="text-sm font-semibold text-ink-800">Email *</span>
-                <input id="cliente-email" type="email" required autocomplete="email"
-                       placeholder="correo@ejemplo.com"
-                       class="mt-2 w-full rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
-            </label>
-            <label class="block">
                 <span class="text-sm font-semibold text-ink-800">Teléfono *</span>
-                <input id="cliente-telefono" type="tel" required pattern="[0-9+\s\-()]{7,50}"
-                       autocomplete="tel" placeholder="600 123 456"
+                <input id="cliente-telefono" type="tel" required inputmode="numeric"
+                       pattern="[67][0-9]{7}" minlength="8" maxlength="8"
+                       autocomplete="tel" placeholder="62585878"
+                       title="8 dígitos, empieza con 6 o 7"
                        class="mt-2 w-full rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
             </label>
             <label class="block">

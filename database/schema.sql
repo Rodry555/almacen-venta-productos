@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS product_images (
 CREATE TABLE IF NOT EXISTS reservations (
   id INT AUTO_INCREMENT PRIMARY KEY,
   customer_name VARCHAR(255) NOT NULL,
-  customer_email VARCHAR(255) NOT NULL,
+  customer_email VARCHAR(255) NULL COMMENT 'Ya no se solicita al reservar; se conserva por compatibilidad',
   customer_phone VARCHAR(50) NOT NULL,
   pickup_date DATE NOT NULL,
   notes TEXT,

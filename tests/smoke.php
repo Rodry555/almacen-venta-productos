@@ -138,19 +138,17 @@ check('POST sin token CSRF devuelve 403', $r['status'] === 403);
 
 $r = req('POST', '/api/agregar-reserva.php', [
     'customer_name'   => 'Juan Perez',
-    'customer_email'  => 'no-es-email',
-    'customer_phone'  => '600123456',
+    'customer_phone'  => '12345678',
     'pickup_date'     => date('Y-m-d', strtotime('+2 days')),
     'items'           => [['id' => 1, 'cantidad' => 1]],
 ], $token);
-check('Email inválido devuelve 400', $r['status'] === 400);
+check('Teléfono inválido devuelve 400', $r['status'] === 400);
 
 // --- Reserva y apartado de stock ------------------------------------------
 $pickup = date('Y-m-d', strtotime('+2 days'));
 $reserva = [
     'customer_name'   => 'Juan Perez',
-    'customer_email'  => 'juan@example.com',
-    'customer_phone'  => '600123456',
+    'customer_phone'  => '62585878',
     'pickup_date'     => $pickup,
     'notes'           => '',
     'items'           => [['id' => 1, 'cantidad' => 3]],

@@ -27,11 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Los productos se cargaron solo con nombre y categoría (precio = 0).
- * Mientras no haya precio real, mostrar "A consultar" en vez de "$0.00".
+ * Mientras no haya precio real, mostrar "A consultar" en vez de "Bs 0.00".
  */
 window.formatoPrecio = function (precio) {
     const numero = Number(precio) || 0;
-    return numero > 0 ? '$' + numero.toFixed(2) : 'A consultar';
+    return numero > 0 ? 'Bs ' + numero.toFixed(2) : 'A consultar';
 };
 
 window.mensaje = function (texto, tipo = 'success') {

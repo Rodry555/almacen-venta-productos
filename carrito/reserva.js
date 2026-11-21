@@ -17,12 +17,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        const telefono = document.getElementById('cliente-telefono').value.trim();
+        if (!/^[67][0-9]{7}$/.test(telefono)) {
+            Swal.fire('Teléfono inválido', 'Debe tener 8 dígitos y empezar con 6 o 7.', 'warning');
+            document.getElementById('cliente-telefono').focus();
+            return;
+        }
+
         const token = document.querySelector('meta[name="csrf-token"]').content;
         const body = {
             csrf_token: token,
             customer_name: document.getElementById('cliente-nombre').value.trim(),
-            customer_email: document.getElementById('cliente-email').value.trim(),
-            customer_phone: document.getElementById('cliente-telefono').value.trim(),
+            customer_phone: telefono,
             pickup_date: fecha.value,
             notes: document.getElementById('cliente-notas').value.trim(),
             items: window.Carrito.items.map((item) => ({ id: item.id, cantidad: item.cantidad }))

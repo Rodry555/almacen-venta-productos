@@ -71,7 +71,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
                     </td>
                     <td class="p-3 font-semibold"><?= e($p['name']) ?></td>
                     <td class="p-3 text-slate-500"><?= e($p['categoria'] ?? '—') ?></td>
-                    <td class="p-3">$<?= e(number_format((float) $p['price'], 2)) ?></td>
+                    <td class="p-3">Bs <?= e(number_format((float) $p['price'], 2)) ?></td>
                     <td class="p-3">
                         <span class="font-bold <?= (int) $p['stock'] <= (int) $p['stock_min'] ? 'text-red-600' : 'text-emerald-600' ?>">
                             <?= (int) $p['stock'] ?>
