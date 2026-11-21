@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/db.php';
 
+/** Único canal de contacto: WhatsApp del administrador. */
+define('WHATSAPP_ADMIN_URL', 'https://wa.me/59162585878');
+define('WHATSAPP_ADMIN_NUMERO', '+591 62585878');
+
 /** Inicia la sesión una sola vez, con cookies seguras. */
 function iniciarSesion(): void
 {

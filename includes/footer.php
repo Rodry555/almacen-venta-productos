@@ -26,23 +26,25 @@
                     <li><a class="hover:text-brand-300 transition" href="/index.php">Inicio</a></li>
                     <li><a class="hover:text-brand-300 transition" href="/productos.php">Todos los productos</a></li>
                     <li><a class="hover:text-brand-300 transition" href="/carrito/carrito.php">Mi carrito</a></li>
-                    <li><a class="hover:text-brand-300 transition" href="/contacto.php">Contacto</a></li>
+                    <li><a class="hover:text-brand-300 transition" href="<?= e(WHATSAPP_ADMIN_URL) ?>" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="text-white font-display font-bold text-sm uppercase tracking-widest mb-4">Ayuda</h4>
                 <ul class="space-y-3 text-sm">
-                    <li><a class="hover:text-brand-300 transition" href="/contacto.php#como-funciona">Cómo reservar</a></li>
-                    <li><a class="hover:text-brand-300 transition" href="/contacto.php">Datos de contacto</a></li>
+                    <li><a class="hover:text-brand-300 transition" href="/index.php#como-funciona">Cómo reservar</a></li>
+                    <li><a class="hover:text-brand-300 transition" href="<?= e(WHATSAPP_ADMIN_URL) ?>" target="_blank" rel="noopener noreferrer">Escribir al admin</a></li>
                     <li><a class="hover:text-brand-300 transition" href="/login.php">Acceso administrador</a></li>
                 </ul>
             </div>
 
             <div>
                 <h4 class="text-white font-display font-bold text-sm uppercase tracking-widest mb-4">Contacto</h4>
-                <p class="text-sm flex items-start gap-3 mb-3"><i class="fa-solid fa-envelope mt-1 text-brand-400"></i>contacto@mialmacen.local</p>
-                <p class="text-sm flex items-start gap-3"><i class="fa-solid fa-phone mt-1 text-brand-400"></i>+00 000 000 000</p>
+                <a class="text-sm flex items-start gap-3 mb-3 hover:text-brand-300 transition"
+                   href="<?= e(WHATSAPP_ADMIN_URL) ?>" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-whatsapp mt-1 text-brand-400"></i><?= e(WHATSAPP_ADMIN_NUMERO) ?>
+                </a>
                 <p class="text-sm flex items-start gap-3 mt-3"><i class="fa-solid fa-clock mt-1 text-brand-400"></i>Lun a Vie · 9:00 – 18:00</p>
             </div>
         </div>

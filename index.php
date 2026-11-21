@@ -35,8 +35,9 @@ include __DIR__ . '/includes/header.php';
                         <i class="fa-solid fa-table-cells"></i> Ver productos
                         <i class="fa-solid fa-arrow-right text-sm"></i>
                     </a>
-                    <a href="/contacto.php" class="inline-flex items-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 py-3.5 font-semibold text-white transition hover:bg-white/15">
-                        <i class="fa-solid fa-circle-question"></i> Cómo funciona
+                    <a href="<?= e(WHATSAPP_ADMIN_URL) ?>" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-2 rounded-xl border border-brand-300/30 bg-brand-400/10 px-6 py-3.5 font-semibold text-brand-100 transition hover:bg-brand-400/20">
+                        <i class="fa-brands fa-whatsapp"></i> Escribir por WhatsApp
                     </a>
                 </div>
                 <div class="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-xs text-slate-300">
@@ -148,7 +149,7 @@ include __DIR__ . '/includes/header.php';
 </section>
 
 <!-- Cómo funciona -->
-<section class="bg-white border-y border-slate-100">
+<section id="como-funciona" class="bg-white border-y border-slate-100 scroll-mt-24">
     <div class="max-w-7xl mx-auto px-4 py-16 md:py-20">
         <div class="text-center max-w-2xl mx-auto" data-aos="fade-up">
             <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600">Reservar es simple</p>

@@ -66,8 +66,9 @@ function navActivo(string $archivo, string $actual): string
                     <a href="/productos.php" class="px-3 py-2 rounded-xl transition <?= navActivo('productos.php', $scriptActual) ?>">
                         <i class="fa-solid fa-table-cells mr-2"></i>Productos
                     </a>
-                    <a href="/contacto.php" class="px-3 py-2 rounded-xl transition <?= navActivo('contacto.php', $scriptActual) ?>">
-                        <i class="fa-solid fa-headset mr-2"></i>Contacto
+                    <a href="<?= e(WHATSAPP_ADMIN_URL) ?>" target="_blank" rel="noopener noreferrer"
+                       class="px-3 py-2 rounded-xl transition text-ink-600 hover:bg-slate-100 hover:text-ink-900">
+                        <i class="fa-brands fa-whatsapp mr-2 text-brand-600"></i>WhatsApp
                     </a>
                 </nav>
 
@@ -93,7 +94,7 @@ function navActivo(string $archivo, string $actual): string
         <nav class="grid gap-1 text-sm font-semibold" aria-label="Navegación móvil">
             <a href="/index.php" class="px-3 py-2.5 rounded-xl <?= navActivo('index.php', $scriptActual) ?>"><i class="fa-solid fa-house mr-3"></i>Inicio</a>
             <a href="/productos.php" class="px-3 py-2.5 rounded-xl <?= navActivo('productos.php', $scriptActual) ?>"><i class="fa-solid fa-table-cells mr-3"></i>Productos</a>
-            <a href="/contacto.php" class="px-3 py-2.5 rounded-xl <?= navActivo('contacto.php', $scriptActual) ?>"><i class="fa-solid fa-headset mr-3"></i>Contacto</a>
+            <a href="<?= e(WHATSAPP_ADMIN_URL) ?>" target="_blank" rel="noopener noreferrer" class="px-3 py-2.5 rounded-xl text-ink-600 hover:bg-slate-100 hover:text-ink-900"><i class="fa-brands fa-whatsapp mr-3 text-brand-600"></i>WhatsApp</a>
             <a href="/carrito/carrito.php" class="px-3 py-2.5 rounded-xl <?= navActivo('carrito.php', $scriptActual) ?>"><i class="fa-solid fa-cart-shopping mr-3"></i>Mi carrito</a>
         </nav>
     </div>

@@ -46,7 +46,7 @@ Sistema web para gestión de almacén y venta de productos. Consiste en un **cat
 ├── index.php                    # Página de inicio
 ├── productos.php                # Galería de productos con filtros
 ├── producto-detalle.php         # Detalle de un producto (?id=X)
-├── contacto.php                 # Página de contacto
+├── contacto.php                 # Redirige al WhatsApp del administrador
 │
 ├── /carrito/
 │   └── carrito.php              # Ver carrito + formulario de reserva

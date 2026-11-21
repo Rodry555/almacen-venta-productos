@@ -28,7 +28,7 @@ docker compose up -d --build
 | `/index.php` | Portada con categorías y productos recientes |
 | `/productos.php` | Galería con filtro por categoría y búsqueda (`?categoria=`, `?q=`) |
 | `/producto-detalle.php?id=X` | Ficha del producto |
-| `/contacto.php` | Información de contacto |
+| `/contacto.php` | Redirige al WhatsApp del administrador (`+591 62585878`) |
 | `/carrito/carrito.php` | Carrito (`localStorage`) + formulario de reserva |
 
 ### Admin (requiere sesión)
@@ -99,6 +99,10 @@ producto (en edición se muestra de solo lectura).
 
 1. En **TiDB Cloud** ejecuta `database/schema.sql` y `database/seed.sql` sobre tu BD (por ejemplo `test`).
    El usuario de TiDB lleva prefijo de cuenta (`xxxxxx.root`).
+   Si la BD **ya existía** con el catálogo anterior, no vuelvas a ejecutar el seed: ejecuta
+   `database/migrate-catalogo.sql`, que borra el catálogo, las reservas, los movimientos y las
+   imágenes antiguos, y vuelve a cargar las 8 categorías y los 60 productos. Haz antes una copia de seguridad:
+   esa migración es destructiva (también elimina las reservas antiguas).
 2. Crea el servicio en **Render** desde este repo con el Blueprint `render.yaml`. Render no tiene
    runtime PHP nativo, por eso se usa el `Dockerfile` incluido.
 3. En el dashboard de Render rellena **una sola variable**:

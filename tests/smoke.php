@@ -171,6 +171,7 @@ check('No se añadió otro movimiento', movimientos(1, 'out') === 1);
 // --- Páginas públicas ------------------------------------------------------
 $r = req('GET', '/index.php');
 check('GET /index.php devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Catálogo con reserva previa') !== false, $r['raw']);
+check('El home enlaza al WhatsApp del admin', strpos($r['raw'], WHATSAPP_ADMIN_URL) !== false);
 
 $r = req('GET', '/productos.php');
 check('GET /productos.php muestra el catálogo', $r['status'] === 200 && strpos($r['raw'], 'Jugo de Manzana Ades 1 L') !== false);
@@ -178,8 +179,10 @@ check('GET /productos.php muestra el catálogo', $r['status'] === 200 && strpos(
 $r = req('GET', '/producto-detalle.php?id=1');
 check('GET /producto-detalle.php?id=1 devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Jugo de Manzana Ades 1 L') !== false);
 
-$r = req('GET', '/contacto.php');
-check('GET /contacto.php devuelve 200', $r['status'] === 200);
+$r = req('GET', '/contacto.php', null, null, false, false);
+check('GET /contacto.php redirige al WhatsApp del admin',
+    $r['status'] === 302 && $r['location'] === WHATSAPP_ADMIN_URL,
+    $r['status'] . ' -> ' . $r['location']);
 
 $r = req('GET', '/carrito/carrito.php');
 check('GET /carrito/carrito.php devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'form-reserva') !== false);
