@@ -198,7 +198,7 @@ check('GET /login.php devuelve 200', $r['status'] === 200);
 $r = req('POST', '/api/login.php', ['email' => 'admin@gmail.com', 'password' => 'incorrecta'], $token);
 check('Login con contraseña incorrecta devuelve 401', $r['status'] === 401);
 
-$r = req('POST', '/api/login.php', ['email' => 'admin@gmail.com', 'password' => 'almacenventasproductos'], $token);
+$r = req('POST', '/api/login.php', ['email' => 'admin@gmail.com', 'password' => 'almacen123'], $token);
 check('Login admin devuelve 200', $r['status'] === 200, $r['raw']);
 $adminToken = (string) ($r['json']['data']['csrf_token'] ?? '');
 check('El token CSRF rota tras el login', $adminToken !== '' && $adminToken !== $token);

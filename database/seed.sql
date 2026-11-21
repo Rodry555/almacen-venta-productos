@@ -4,7 +4,7 @@ SET NAMES utf8mb4;
 -- Administrador de producción.
 -- Hash bcrypt con coste 12, compatible con password_verify().
 INSERT INTO users (email, password, name) VALUES
-  ('admin@gmail.com', '$2y$12$MBQRzYzStniZNm.alMkypuEFMkvMS2ljtlNibyjP5Myqge/kn0bUu', 'Administrador');
+  ('admin@gmail.com', '$2y$12$JByfHb.4IjAYpuMayCUL/O8nAsisbDjXvlglrtTXTBnKAKUfukD4C', 'Administrador');
 
 -- Catálogo real del almacén: por ahora solo se conocen los NOMBRES y las CATEGORÍAS.
 -- No hay fotos todavía: el catálogo muestra un contenedor placeholder.
