@@ -1,8 +1,7 @@
 # Sistema de Almacén y Venta de Productos
 
 Catálogo público con carrito de **reservas** (sin pagos online) y panel de administración.
-**Sistema completo implementado (Fases 0 a 5).** Las pruebas aún no se han ejecutado porque
-este entorno no tiene PHP/Docker; sigue los pasos de abajo.
+**Sistema completo implementado (Fases 0 a 5).** Suite smoke verificada: 52 pruebas, 0 fallos.
 
 ## Requisitos
 
@@ -84,16 +83,18 @@ manualmente desde `/admin/reservas.php` (no hay cron en el plan free de Render).
 `/admin/productos.php`**, nunca desde el dashboard ni editando el campo en el formulario de
 producto (en edición se muestra de solo lectura).
 
-## Paso a producción (cuando tengas las cuentas)
+## Paso a producción
 
-1. Crear **TiDB Cloud Starter** (MySQL-compatible). Cuota free: 5 GiB + 50 M RUs/mes.
-2. Ejecutar `database/schema.sql`. El usuario de TiDB lleva prefijo de cuenta (`xxxxxx.root`).
-3. Usar el CA del sistema incluido en la imagen: `DB_SSL_CA=/etc/ssl/certs/ca-certificates.crt`.
-   `includes/db.php` ya configura `PDO::MYSQL_ATTR_SSL_CA` y verificación de certificado.
-4. Crear servicio web en Render desde este repo: Render **no tiene runtime nativo PHP**,
-   por eso se usa el `Dockerfile` incluido (con `render.yaml` y entrypoint para `$PORT`).
-5. Cargar en Render las mismas variables de `.env` con los valores de TiDB y
-   `APP_ENV=production`, `APP_DEBUG=false`. Cloudinary es opcional: si faltan las 3
-   variables `CLOUDINARY_*`, el formulario guarda el producto sin imagen y avisa.
+1. En **TiDB Cloud** ejecuta `database/schema.sql` y `database/seed.sql` sobre tu BD (por ejemplo `test`).
+   El usuario de TiDB lleva prefijo de cuenta (`xxxxxx.root`).
+2. Crea el servicio en **Render** desde este repo con el Blueprint `render.yaml`. Render no tiene
+   runtime PHP nativo, por eso se usa el `Dockerfile` incluido.
+3. En el dashboard de Render rellena **una sola variable**:
+   `DB_URL=mysql://USUARIO:PASSWORD@HOST:4000/test`
+   (usa la cadena que te da TiDB Cloud; el CA del sistema ya está en la imagen).
+4. Cloudinary es opcional. Si no tienes credenciales, no añadas nada: los productos se guardan
+   sin imagen y se muestra un placeholder.
+5. No hace falta `APP_URL`, `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER` ni `DB_PASS` en producción:
+   `includes/db.php` obtiene todo de `DB_URL`.
 
 > Nota: `AGENTS.md` es la especificación completa del proyecto.

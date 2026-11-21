@@ -1,25 +1,9 @@
-# Render Blueprint. Solo el password de BD se rellena en el dashboard (sync: false).
+# Render Blueprint. El password va en el dashboard (sync: false), nunca en GitHub.
 services:
   - type: web
     name: almacen-venta
     runtime: docker
     plan: free
     envVars:
-      - key: DB_HOST
-        value: gateway01.sa-east-1.prod.aws.tidbcloud.com
-      - key: DB_PORT
-        value: "4000"
-      - key: DB_NAME
-        value: test
-      - key: DB_USER
-        value: 3Qj1CvVZX9SSS8G.root
-      - key: DB_PASS
-        sync: false
-      - key: DB_SSL_CA
-        value: /etc/ssl/certs/ca-certificates.crt
-      - key: APP_ENV
-        value: production
-      - key: APP_DEBUG
-        value: "false"
-      - key: APP_URL
+      - key: DB_URL
         sync: false

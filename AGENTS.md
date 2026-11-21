@@ -510,23 +510,20 @@ document.addEventListener('DOMContentLoaded', () => Carrito.init());
 ## 🌐 Variables de Entorno (.env)
 
 ```env
-# Base de datos (TiDB Cloud)
-DB_HOST=tu-host.tidbcloud.com
-DB_PORT=4000
-DB_NAME=tu_database
-DB_USER=tu_usuario
-DB_PASS=tu_password
+# Producción (Render + TiDB Cloud): una sola variable con la cadena completa
+DB_URL=mysql://tu_usuario:tu_password@tu-host.tidbcloud.com:4000/test
 
-# Cloudinary
+# Local (docker compose): variables separadas
+DB_HOST=mysql
+DB_PORT=3306
+DB_NAME=test
+DB_USER=almacen
+DB_PASS=almacen_secret
+
+# Cloudinary (opcional)
 CLOUDINARY_CLOUD_NAME=tu_cloud_name
 CLOUDINARY_API_KEY=tu_api_key
 CLOUDINARY_API_SECRET=tu_api_secret
-
-# Admin (solo para desarrollo, en producción usar BD)
-ADMIN_EMAIL=admin@gmail.com
-
-# App
-APP_URL=https://tu-app.onrender.com
 ```
 
 ---

@@ -2,13 +2,10 @@
 declare(strict_types=1);
 
 /**
- * Devuelve la ruta al certificado CA de TiDB cuando se usa TLS.
- * Se admiten dos formas de configurarlo (en orden de prioridad):
- *   - DB_SSL_CA_B64: contenido del .pem en base64 (ideal para Render, sin montar archivos)
- *   - DB_SSL_CA:     ruta a un .pem dentro del contenedor
- * En local ambas variables quedan vacías y la conexión va sin TLS.
+ * Ruta al certificado CA cuando la conexión usa TLS.
+ * Prioridad: DB_SSL_CA_B64 > DB_SSL_CA > CA del sistema (solo con DB_URL).
  */
-function dbCaPath(): ?string
+function dbCaPath(bool $usarCaSistema = false): ?string
 {
     $b64 = getenv('DB_SSL_CA_B64');
     if ($b64 !== false && $b64 !== '') {
@@ -25,12 +22,66 @@ function dbCaPath(): ?string
     }
 
     $path = getenv('DB_SSL_CA');
-    return ($path !== false && $path !== '') ? $path : null;
+    if ($path !== false && $path !== '') {
+        return $path;
+    }
+
+    // En producción (DB_URL) la imagen trae el CA del sistema instalado.
+    if ($usarCaSistema && is_file('/etc/ssl/certs/ca-certificates.crt')) {
+        return '/etc/ssl/certs/ca-certificates.crt';
+    }
+
+    return null;
 }
 
 /**
- * Conexión PDO única por petición.
- * La misma función sirve para MySQL local y para TiDB Cloud Starter.
+ * Configuración de la BD.
+ *
+ * Producción: una sola variable de entorno con la cadena completa:
+ *   DB_URL=mysql://usuario:password@host:4000/test
+ * (DATABASE_URL se acepta como alias.)
+ *
+ * Desarrollo local: se mantienen las variables separadas de docker compose.
+ */
+function dbConfig(): array
+{
+    $url = getenv('DB_URL');
+    if ($url === false || $url === '') {
+        $url = getenv('DATABASE_URL');
+    }
+
+    if ($url !== false && $url !== '') {
+        $partes = parse_url($url);
+        if ($partes === false || empty($partes['host'])) {
+            throw new RuntimeException('DB_URL no es válida.');
+        }
+
+        $nombre = isset($partes['path']) ? ltrim($partes['path'], '/') : '';
+
+        return [
+            'host' => $partes['host'],
+            'port' => isset($partes['port']) ? (string) $partes['port'] : '3306',
+            'name' => $nombre !== '' ? $nombre : 'test',
+            'user' => isset($partes['user']) ? rawurldecode($partes['user']) : '',
+            'pass' => isset($partes['pass']) ? rawurldecode($partes['pass']) : '',
+            'tls'  => true,
+        ];
+    }
+
+    $pass = getenv('DB_PASS');
+
+    return [
+        'host' => getenv('DB_HOST') ?: '127.0.0.1',
+        'port' => getenv('DB_PORT') ?: '3306',
+        'name' => getenv('DB_NAME') ?: 'test',
+        'user' => getenv('DB_USER') ?: 'root',
+        'pass' => ($pass === false) ? '' : $pass,
+        'tls'  => false,
+    ];
+}
+
+/**
+ * Conexión PDO única por petición. Sirve para MySQL local y para TiDB Cloud.
  */
 function db(): PDO
 {
@@ -39,14 +90,9 @@ function db(): PDO
         return $pdo;
     }
 
-    $host = getenv('DB_HOST') ?: '127.0.0.1';
-    $port = getenv('DB_PORT') ?: '3306';
-    $name = getenv('DB_NAME') ?: 'test';
-    $user = getenv('DB_USER') ?: 'root';
-    $pass = getenv('DB_PASS');
-    $pass = ($pass === false) ? '' : $pass;
+    $cfg = dbConfig();
 
-    $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
+    $dsn = "mysql:host={$cfg['host']};port={$cfg['port']};dbname={$cfg['name']};charset=utf8mb4";
     $options = [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -54,7 +100,7 @@ function db(): PDO
         PDO::ATTR_STRINGIFY_FETCHES  => false,
     ];
 
-    $ca = dbCaPath();
+    $ca = dbCaPath($cfg['tls']);
     if ($ca !== null) {
         $options[PDO::MYSQL_ATTR_SSL_CA] = $ca;
         if (defined('PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT')) {
@@ -63,7 +109,7 @@ function db(): PDO
     }
 
     try {
-        $pdo = new PDO($dsn, $user, $pass, $options);
+        $pdo = new PDO($dsn, $cfg['user'], $cfg['pass'], $options);
     } catch (PDOException $e) {
         // Nunca exponer credenciales ni detalles de conexión al cliente.
         error_log('Error de conexión a BD: ' . $e->getMessage());
