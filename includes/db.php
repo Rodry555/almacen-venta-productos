@@ -41,7 +41,7 @@ function db(): PDO
 
     $host = getenv('DB_HOST') ?: '127.0.0.1';
     $port = getenv('DB_PORT') ?: '3306';
-    $name = getenv('DB_NAME') ?: 'almacen';
+    $name = getenv('DB_NAME') ?: 'test';
     $user = getenv('DB_USER') ?: 'root';
     $pass = getenv('DB_PASS');
     $pass = ($pass === false) ? '' : $pass;

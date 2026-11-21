@@ -33,7 +33,7 @@ $pageTitle = 'Acceso administrador';
             <label class="block">
                 <span class="text-sm font-semibold text-slate-700">Email</span>
                 <input id="login-email" type="email" required autocomplete="username"
-                       value="admin@example.com"
+                       value="admin@gmail.com"
                        class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
             </label>
             <label class="block mt-4">

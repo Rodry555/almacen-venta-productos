@@ -523,7 +523,7 @@ CLOUDINARY_API_KEY=tu_api_key
 CLOUDINARY_API_SECRET=tu_api_secret
 
 # Admin (solo para desarrollo, en producción usar BD)
-ADMIN_EMAIL=admin@example.com
+ADMIN_EMAIL=admin@gmail.com
 
 # App
 APP_URL=https://tu-app.onrender.com

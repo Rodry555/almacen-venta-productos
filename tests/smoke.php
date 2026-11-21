@@ -192,10 +192,10 @@ check('Dashboard sin sesión redirige a /login.php',
 $r = req('GET', '/login.php');
 check('GET /login.php devuelve 200', $r['status'] === 200);
 
-$r = req('POST', '/api/login.php', ['email' => 'admin@example.com', 'password' => 'incorrecta'], $token);
+$r = req('POST', '/api/login.php', ['email' => 'admin@gmail.com', 'password' => 'incorrecta'], $token);
 check('Login con contraseña incorrecta devuelve 401', $r['status'] === 401);
 
-$r = req('POST', '/api/login.php', ['email' => 'admin@example.com', 'password' => 'admin123'], $token);
+$r = req('POST', '/api/login.php', ['email' => 'admin@gmail.com', 'password' => 'almacenventasproductos'], $token);
 check('Login admin devuelve 200', $r['status'] === 200, $r['raw']);
 $adminToken = (string) ($r['json']['data']['csrf_token'] ?? '');
 check('El token CSRF rota tras el login', $adminToken !== '' && $adminToken !== $token);

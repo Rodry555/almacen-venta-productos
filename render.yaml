@@ -1,4 +1,4 @@
-# Render Blueprint. Los secretos se rellenan en el dashboard (sync: false).
+# Render Blueprint. Solo el password de BD se rellena en el dashboard (sync: false).
 services:
   - type: web
     name: almacen-venta
@@ -6,26 +6,20 @@ services:
     plan: free
     envVars:
       - key: DB_HOST
-        sync: false
+        value: gateway01.sa-east-1.prod.aws.tidbcloud.com
       - key: DB_PORT
         value: "4000"
       - key: DB_NAME
-        sync: false
+        value: test
       - key: DB_USER
-        sync: false
+        value: 3Qj1CvVZX9SSS8G.root
       - key: DB_PASS
         sync: false
-      - key: DB_SSL_CA_B64
-        sync: false
+      - key: DB_SSL_CA
+        value: /etc/ssl/certs/ca-certificates.crt
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: "false"
       - key: APP_URL
-        sync: false
-      - key: CLOUDINARY_CLOUD_NAME
-        sync: false
-      - key: CLOUDINARY_API_KEY
-        sync: false
-      - key: CLOUDINARY_API_SECRET
         sync: false

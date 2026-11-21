@@ -1,6 +1,6 @@
 -- Esquema completo. Válido tanto para MySQL 8 local como para TiDB Cloud Starter.
-CREATE DATABASE IF NOT EXISTS `almacen` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE `almacen`;
+CREATE DATABASE IF NOT EXISTS `test` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `test`;
 
 CREATE TABLE IF NOT EXISTS users (
   id INT AUTO_INCREMENT PRIMARY KEY,

@@ -17,8 +17,8 @@ docker compose up -d --build
 ```
 
 - Web: http://localhost:8000
-- MySQL: `localhost:3306` (usuario `almacen`, pass `almacen_secret`, BD `almacen`)
-- Login admin: **http://localhost:8000/login.php** → `admin@example.com` / `admin123`
+- MySQL: `localhost:3306` (usuario `almacen`, pass `almacen_secret`, BD `test`)
+- Login admin: **http://localhost:8000/login.php** → credenciales definidas en `database/seed.sql`
 
 ## Mapa de rutas
 
@@ -88,12 +88,12 @@ producto (en edición se muestra de solo lectura).
 
 1. Crear **TiDB Cloud Starter** (MySQL-compatible). Cuota free: 5 GiB + 50 M RUs/mes.
 2. Ejecutar `database/schema.sql`. El usuario de TiDB lleva prefijo de cuenta (`xxxxxx.root`).
-3. Descargar el CA de TiDB, convertirlo a base64 y ponerlo en `DB_SSL_CA_B64`.
+3. Usar el CA del sistema incluido en la imagen: `DB_SSL_CA=/etc/ssl/certs/ca-certificates.crt`.
    `includes/db.php` ya configura `PDO::MYSQL_ATTR_SSL_CA` y verificación de certificado.
 4. Crear servicio web en Render desde este repo: Render **no tiene runtime nativo PHP**,
    por eso se usa el `Dockerfile` incluido (con `render.yaml` y entrypoint para `$PORT`).
 5. Cargar en Render las mismas variables de `.env` con los valores de TiDB y
-   `APP_ENV=production`, `APP_DEBUG=false`. Para Cloudinary basta con las 3 variables
-   `CLOUDINARY_*`; si faltan, el formulario guarda el producto sin imagen y avisa.
+   `APP_ENV=production`, `APP_DEBUG=false`. Cloudinary es opcional: si faltan las 3
+   variables `CLOUDINARY_*`, el formulario guarda el producto sin imagen y avisa.
 
 > Nota: `AGENTS.md` es la especificación completa del proyecto.

@@ -1,10 +1,10 @@
-USE `almacen`;
+USE `test`;
 SET NAMES utf8mb4;
 
--- Admin de prueba: admin@example.com / admin123
--- Hash bcrypt generado con coste 12 (compatible con password_verify()).
+-- Administrador de producción.
+-- Hash bcrypt con coste 12, compatible con password_verify().
 INSERT INTO users (email, password, name) VALUES
-  ('admin@example.com', '$2b$12$K5o7uAABwOWEbff.IsAoOutqV3ibyjn7n4onfIA.hcXSHNZ4zGRCa', 'Administrador');
+  ('admin@gmail.com', '$2y$12$MBQRzYzStniZNm.alMkypuEFMkvMS2ljtlNibyjP5Myqge/kn0bUu', 'Administrador');
 
 INSERT INTO categories (id, name, description, is_active) VALUES
   (1, 'Papelería', 'Cuadernos, lápices y útiles de escritura', TRUE),

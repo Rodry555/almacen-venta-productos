@@ -19,7 +19,7 @@ services:
       --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root_secret
-      MYSQL_DATABASE: almacen
+      MYSQL_DATABASE: test
       MYSQL_USER: almacen
       MYSQL_PASSWORD: almacen_secret
     ports:
