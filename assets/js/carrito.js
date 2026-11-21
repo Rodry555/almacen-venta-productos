@@ -92,6 +92,8 @@ const Carrito = {
         const contador = document.getElementById('carrito-contador');
         if (contador) {
             contador.textContent = this.items.reduce((sum, item) => sum + item.cantidad, 0);
+            contador.classList.add('scale-125');
+            setTimeout(() => contador.classList.remove('scale-125'), 180);
         }
     },
 
@@ -117,30 +119,51 @@ const Carrito = {
         if (!contenedor) return;
 
         if (this.items.length === 0) {
-            contenedor.innerHTML = '<p class="text-slate-500 py-8 text-center">Tu carrito está vacío. <a class="text-blue-600 underline" href="/productos.php">Ver productos</a></p>';
+            contenedor.innerHTML = `
+                <div class="py-14 px-6 text-center">
+                    <span class="w-16 h-16 mx-auto rounded-2xl bg-brand-50 text-brand-500 grid place-items-center text-3xl">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                    </span>
+                    <p class="font-display font-bold text-lg text-ink-900 mt-4">Tu carrito está vacío</p>
+                    <p class="text-sm text-ink-500 mt-1">Explora el catálogo y agrega los productos que quieras reservar.</p>
+                    <a href="/productos.php" class="inline-flex mt-5 px-5 py-2.5 rounded-xl bg-ink-900 text-white text-sm font-semibold hover:bg-brand-700 transition">
+                        <i class="fa-solid fa-arrow-right mr-2"></i> Ver productos
+                    </a>
+                </div>`;
         } else {
             contenedor.innerHTML = this.items.map((item) => `
-                <div class="flex items-center gap-4 border-b border-slate-100 py-4">
-                    <img src="${this.escape(item.imagen)}" alt="" class="w-16 h-16 rounded object-cover bg-slate-100">
-                    <div class="flex-1">
-                        <p class="font-semibold">${this.escape(item.nombre)}</p>
-                        <p class="text-sm text-slate-500">$${item.precio.toFixed(2)} c/u · máx. ${item.stock}</p>
+                <div class="flex flex-col sm:flex-row sm:items-center gap-4 border-b border-slate-100 py-5 last:border-0">
+                    <div class="w-16 h-16 shrink-0 rounded-2xl bg-gradient-to-br from-brand-50 to-slate-100 overflow-hidden grid place-items-center">
+                        <img src="${this.escape(item.imagen)}" alt="" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-ink-900 leading-snug">${this.escape(item.nombre)}</p>
+                        <p class="text-xs text-ink-500 mt-1">${window.formatoPrecio(item.precio)} c/u · máx. ${item.stock}</p>
                     </div>
                     <div class="flex items-center gap-2">
-                        <button type="button" data-menos="${item.id}" class="w-8 h-8 rounded bg-slate-200 hover:bg-slate-300">−</button>
+                        <button type="button" data-menos="${item.id}" aria-label="Quitar una unidad"
+                                class="w-9 h-9 rounded-xl border border-slate-200 hover:bg-brand-50 hover:border-brand-300 hover:text-brand-700 transition font-bold">−</button>
                         <input type="number" data-cantidad="${item.id}" value="${item.cantidad}" min="1" max="${item.stock}"
-                               class="w-14 text-center border border-slate-300 rounded">
-                        <button type="button" data-mas="${item.id}" class="w-8 h-8 rounded bg-slate-200 hover:bg-slate-300">+</button>
+                               aria-label="Cantidad"
+                               class="w-14 h-9 text-center border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-400">
+                        <button type="button" data-mas="${item.id}" aria-label="Agregar una unidad"
+                                class="w-9 h-9 rounded-xl border border-slate-200 hover:bg-brand-50 hover:border-brand-300 hover:text-brand-700 transition font-bold">+</button>
                     </div>
-                    <span class="font-bold w-24 text-right">$${(item.precio * item.cantidad).toFixed(2)}</span>
-                    <button type="button" data-quitar="${item.id}" class="text-red-500 hover:text-red-700" aria-label="Eliminar">
-                        <i class="fa-solid fa-trash"></i>
-                    </button>
+                    <div class="flex items-center justify-between sm:justify-end gap-4 sm:w-32">
+                        <span class="font-bold text-ink-900">${window.formatoPrecio(item.precio * item.cantidad)}</span>
+                        <button type="button" data-quitar="${item.id}" class="text-rose-500 hover:text-rose-700 transition" aria-label="Eliminar producto">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
                 </div>`).join('');
         }
 
+        const cantidades = document.getElementById('carrito-cantidades');
+        if (cantidades) {
+            cantidades.textContent = this.items.reduce((sum, item) => sum + item.cantidad, 0);
+        }
         const total = document.getElementById('carrito-total');
-        if (total) total.textContent = '$' + this.obtenerTotal().toFixed(2);
+        if (total) total.textContent = window.formatoPrecio(this.obtenerTotal());
         const boton = document.getElementById('btn-reservar');
         if (boton) boton.disabled = this.items.length === 0;
     }

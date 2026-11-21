@@ -1,9 +1,97 @@
-/* Ajustes mínimos que Tailwind CDN no cubre cómodamente. */
-img { object-position: center; }
-.dataTables_wrapper { font-size: .875rem; }
+/* Complementos visuales que el CDN de Tailwind no cubre con utilidades. */
+
+html {
+    scroll-behavior: smooth;
+}
+
+::selection {
+    background: #a7f3d0;
+    color: #064e3b;
+}
+
+/* Fondo del hero: degradado profundo + rejilla tenue. */
+.hero-fondo {
+    background-image:
+        radial-gradient(circle at 82% 18%, rgba(16, 185, 129, 0.28), transparent 45%),
+        radial-gradient(circle at 12% 85%, rgba(56, 189, 248, 0.18), transparent 42%),
+        linear-gradient(135deg, #111d24 0%, #1c2a33 45%, #064e3b 100%);
+}
+
+.hero-malla {
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: linear-gradient(to bottom, #000 20%, transparent 92%);
+    mask-image: linear-gradient(to bottom, #000 20%, transparent 92%);
+}
+
+.cristal {
+    background: rgba(255, 255, 255, 0.09);
+    -webkit-backdrop-filter: blur(18px);
+    backdrop-filter: blur(18px);
+}
+
+/* Recorte de texto para nombres largos de productos. */
+.linea-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.linea-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Chips de categorías: desplazamiento horizontal sin barra visible en móvil. */
+.sin-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.sin-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Transición suave para tarjetas y botones. */
+.producto-card,
+.categoria-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.producto-card:hover,
+.categoria-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Tablas del panel (DataTables 3 sin jQuery). */
+.dataTables_wrapper {
+    font-size: 0.875rem;
+    color: #314049;
+}
 .dataTables_wrapper .dt-search input,
 .dataTables_wrapper .dt-length select {
     border: 1px solid #cbd5e1;
-    border-radius: .5rem;
-    padding: .4rem .6rem;
+    border-radius: 0.75rem;
+    padding: 0.45rem 0.75rem;
+    background: #fff;
+    outline: none;
+}
+.dataTables_wrapper .dt-search input:focus,
+.dataTables_wrapper .dt-length select:focus {
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+.dataTables_wrapper table.dataTable thead th {
+    background: #f4f7f8;
+    color: #5a7786;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+.dataTables_wrapper table.dataTable tbody tr:hover {
+    background: #f7fdfa;
 }

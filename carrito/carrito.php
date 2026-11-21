@@ -4,60 +4,119 @@ $pageTitle = 'Mi carrito';
 $extraScripts = ['/carrito/reserva.js'];
 include __DIR__ . '/../includes/header.php';
 ?>
-<div class="max-w-6xl mx-auto px-4 py-10">
-    <h1 class="text-3xl font-bold mb-2"><i class="fa-solid fa-cart-shopping mr-2 text-blue-600"></i>Mi carrito</h1>
-    <p class="text-slate-500 mb-8">Revisa las cantidades y completa tus datos para reservar.</p>
+<div class="max-w-7xl mx-auto px-4 py-10 md:py-14">
+    <nav class="mb-4 flex items-center gap-2 text-xs text-ink-500">
+        <a href="/productos.php" class="hover:text-brand-700">Productos</a>
+        <i class="fa-solid fa-chevron-right text-[9px]"></i>
+        <span class="font-semibold text-ink-800">Mi carrito</span>
+    </nav>
 
-    <div class="grid gap-8 lg:grid-cols-3">
-        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm p-4 md:p-6">
-            <div id="carrito-items"></div>
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4" data-aos="fade-up">
+        <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600">Paso 1 de 2</p>
+            <h1 class="mt-2 font-display text-3xl md:text-4xl font-extrabold tracking-tight text-ink-900">
+                <i class="fa-solid fa-cart-shopping mr-2 text-brand-500"></i>Mi carrito
+            </h1>
+            <p class="mt-3 text-ink-500">Revisa las cantidades y completa tus datos para reservar.</p>
         </div>
+        <a href="/productos.php" class="inline-flex items-center gap-2 self-start text-sm font-bold text-brand-700 hover:underline">
+            <i class="fa-solid fa-arrow-left"></i> Seguir explorando
+        </a>
+    </div>
 
-        <aside class="bg-white rounded-2xl shadow-sm p-6 h-fit">
-            <h2 class="font-bold text-lg mb-4">Resumen</h2>
-            <div class="flex justify-between text-slate-600 mb-2">
-                <span>Productos</span><span id="carrito-cantidades">0</span>
+    <div class="mt-8 grid gap-6 lg:grid-cols-[1fr_340px]">
+        <section class="rounded-3xl border border-slate-100 bg-white p-4 shadow-soft sm:p-6" data-aos="fade-up">
+            <div class="mb-2 flex items-center justify-between px-1">
+                <h2 class="font-display text-lg font-bold text-ink-900">Productos seleccionados</h2>
+                <span class="text-xs text-ink-500">Ajusta las cantidades si quieres</span>
             </div>
-            <div class="flex justify-between font-bold text-xl mt-4 pt-4 border-t">
-                <span>Total estimado</span><span id="carrito-total">$0.00</span>
+            <div id="carrito-items"></div>
+        </section>
+
+        <aside class="h-fit rounded-3xl border border-slate-100 bg-white p-6 shadow-soft lg:sticky lg:top-24" data-aos="fade-up" data-aos-delay="100">
+            <span class="w-11 h-11 rounded-2xl bg-brand-50 text-brand-600 grid place-items-center text-xl">
+                <i class="fa-solid fa-receipt"></i>
+            </span>
+            <h2 class="mt-4 font-display text-xl font-bold text-ink-900">Resumen</h2>
+            <div class="mt-5 space-y-3 text-sm">
+                <div class="flex justify-between text-ink-500">
+                    <span>Unidades</span><span id="carrito-cantidades" class="font-bold text-ink-900">0</span>
+                </div>
+                <div class="flex justify-between text-ink-500">
+                    <span>Entrega</span><span class="font-semibold text-ink-800">Retiro en tienda</span>
+                </div>
+                <div class="flex justify-between text-ink-500">
+                    <span>Pago</span><span class="font-semibold text-ink-800">Al retirar</span>
+                </div>
             </div>
-            <p class="text-xs text-slate-400 mt-2">El total se confirma al retirar.</p>
+            <div class="mt-5 flex items-end justify-between border-t border-slate-100 pt-5">
+                <div>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-ink-400">Total estimado</p>
+                    <p id="carrito-total" class="mt-1 font-display text-2xl font-extrabold text-ink-900">A consultar</p>
+                </div>
+            </div>
+            <p class="mt-4 rounded-xl bg-cream p-3 text-[11px] leading-relaxed text-ink-500">
+                <i class="fa-solid fa-circle-info mr-1 text-brand-500"></i>
+                El precio y la disponibilidad se confirman al retirar.
+            </p>
         </aside>
     </div>
 
-    <form id="form-reserva" class="bg-white rounded-2xl shadow-sm p-6 mt-8 max-w-3xl">
-        <h2 class="font-bold text-xl mb-5">Datos para la reserva</h2>
-        <div class="grid gap-4 md:grid-cols-2">
+    <!-- Formulario de reserva -->
+    <form id="form-reserva"
+          class="mt-6 max-w-4xl rounded-3xl border border-slate-100 bg-white p-5 shadow-soft sm:p-8" data-aos="fade-up">
+        <div class="flex items-start gap-4 border-b border-slate-100 pb-5">
+            <span class="w-12 h-12 shrink-0 rounded-2xl bg-ink-900 text-brand-300 grid place-items-center text-xl">
+                <i class="fa-solid fa-calendar-check"></i>
+            </span>
+            <div>
+                <p class="text-xs font-bold uppercase tracking-[0.2em] text-brand-600">Paso 2 de 2</p>
+                <h2 class="mt-1 font-display text-xl font-bold text-ink-900 sm:text-2xl">Datos para la reserva</h2>
+                <p class="mt-1 text-sm text-ink-500">Te contactaremos para confirmarla.</p>
+            </div>
+        </div>
+
+        <div class="mt-6 grid gap-5 md:grid-cols-2">
             <label class="block">
-                <span class="text-sm font-semibold">Nombre completo *</span>
+                <span class="text-sm font-semibold text-ink-800">Nombre completo *</span>
                 <input id="cliente-nombre" required minlength="3" maxlength="255" autocomplete="name"
-                       class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                       placeholder="Tu nombre y apellido"
+                       class="mt-2 w-full rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
             </label>
             <label class="block">
-                <span class="text-sm font-semibold">Email *</span>
+                <span class="text-sm font-semibold text-ink-800">Email *</span>
                 <input id="cliente-email" type="email" required autocomplete="email"
-                       class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                       placeholder="correo@ejemplo.com"
+                       class="mt-2 w-full rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
             </label>
             <label class="block">
-                <span class="text-sm font-semibold">Teléfono *</span>
+                <span class="text-sm font-semibold text-ink-800">Teléfono *</span>
                 <input id="cliente-telefono" type="tel" required pattern="[0-9+\s\-()]{7,50}"
-                       autocomplete="tel" class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                       autocomplete="tel" placeholder="600 123 456"
+                       class="mt-2 w-full rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
             </label>
             <label class="block">
-                <span class="text-sm font-semibold">Fecha deseada de retiro *</span>
+                <span class="text-sm font-semibold text-ink-800">Fecha deseada de retiro *</span>
                 <input id="cliente-fecha" type="date" required
-                       class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                       class="mt-2 w-full rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
             </label>
         </div>
-        <label class="block mt-4">
-            <span class="text-sm font-semibold">Notas (opcional)</span>
-            <textarea id="cliente-notas" rows="3" maxlength="1000"
-                      class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"></textarea>
+        <label class="mt-5 block">
+            <span class="text-sm font-semibold text-ink-800">Notas (opcional)</span>
+            <textarea id="cliente-notas" rows="3" maxlength="1000" placeholder="Indicaciones para tu pedido..."
+                      class="mt-2 w-full rounded-xl border border-slate-200 bg-cream px-4 py-3 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100"></textarea>
         </label>
-        <button id="btn-reservar" type="submit"
-                class="mt-6 bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-8 rounded-lg disabled:bg-slate-300 disabled:cursor-not-allowed">
-            <i class="fa-solid fa-check mr-2"></i> Confirmar reserva
-        </button>
+
+        <div class="mt-7 flex flex-col gap-4 border-t border-slate-100 pt-6 sm:flex-row sm:items-center sm:justify-between">
+            <p class="flex items-start gap-2 text-xs text-ink-500 max-w-sm">
+                <i class="fa-solid fa-lock mt-0.5 text-brand-500"></i>
+                Tu stock queda apartado al enviar la reserva. No se realiza ningún cobro online.
+            </p>
+            <button id="btn-reservar" type="submit"
+                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-600 px-7 py-3.5 font-bold text-white shadow-soft transition hover:bg-brand-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-400">
+                <i class="fa-solid fa-check"></i> Confirmar reserva
+            </button>
+        </div>
     </form>
 </div>
 <?php include __DIR__ . '/../includes/footer.php'; ?>

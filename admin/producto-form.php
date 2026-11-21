@@ -194,7 +194,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
 <?php endif; ?>
 
 <form method="post" enctype="multipart/form-data" action="/admin/producto-form.php<?= $esNuevo ? '' : '?id=' . (int) $producto['id'] ?>"
-      class="bg-white rounded-xl shadow-sm p-6 max-w-3xl">
+      class="max-w-3xl rounded-3xl border border-slate-100 bg-white p-6 shadow-soft sm:p-8">
     <?= csrfField() ?>
 
     <div class="grid gap-5 md:grid-cols-2">
@@ -202,25 +202,25 @@ require_once __DIR__ . '/../includes/admin-header.php';
             <span class="text-sm font-semibold">Nombre *</span>
             <input name="name" required minlength="3" maxlength="255"
                    value="<?= e($producto['name']) ?>"
-                   class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                   class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
         </label>
 
         <label class="block md:col-span-2">
             <span class="text-sm font-semibold">Descripción</span>
             <textarea name="description" rows="4" maxlength="5000"
-                      class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"><?= e($producto['description']) ?></textarea>
+                      class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100"><?= e($producto['description']) ?></textarea>
         </label>
 
         <label class="block">
             <span class="text-sm font-semibold">Precio *</span>
             <input name="price" type="number" step="0.01" min="0" required
                    value="<?= e($producto['price']) ?>"
-                   class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                   class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
         </label>
 
         <label class="block">
             <span class="text-sm font-semibold">Categoría</span>
-            <select name="category_id" class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+            <select name="category_id" class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
                 <option value="0">Sin categoría</option>
                 <?php foreach ($categorias as $c): ?>
                     <option value="<?= (int) $c['id'] ?>" <?= (int) $producto['category_id'] === (int) $c['id'] ? 'selected' : '' ?>>
@@ -234,7 +234,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
             <label class="block">
                 <span class="text-sm font-semibold">Stock inicial</span>
                 <input name="stock" type="number" min="0" value="0"
-                       class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                       class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
                 <span class="text-xs text-slate-400">Se registrará como movimiento "Stock inicial".</span>
             </label>
         <?php else: ?>
@@ -252,13 +252,13 @@ require_once __DIR__ . '/../includes/admin-header.php';
         <label class="block">
             <span class="text-sm font-semibold">Stock mínimo (alerta)</span>
             <input name="stock_min" type="number" min="0" required value="<?= (int) $producto['stock_min'] ?>"
-                   class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                   class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
         </label>
 
         <label class="block md:col-span-2">
             <span class="text-sm font-semibold">Imagen (JPG, PNG, WEBP o GIF — máx. 5 MB)</span>
             <input name="imagen" type="file" accept="image/jpeg,image/png,image/webp,image/gif"
-                   class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 file:mr-3 file:font-semibold">
+                   class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm file:mr-3 file:font-semibold">
             <?php if (!empty($producto['image_url'])): ?>
                 <img src="<?= e($producto['image_url']) ?>" alt="Imagen actual" class="mt-3 w-24 h-24 rounded object-cover">
             <?php endif; ?>
@@ -271,11 +271,11 @@ require_once __DIR__ . '/../includes/admin-header.php';
         </label>
     </div>
 
-    <div class="flex gap-3 mt-8">
-        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-lg">
-            <i class="fa-solid fa-floppy-disk mr-2"></i>Guardar
+    <div class="mt-8 flex gap-3">
+        <button type="submit" class="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-6 py-2.5 text-sm font-bold text-white hover:bg-brand-700">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar
         </button>
-        <a href="/admin/productos.php" class="px-6 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 font-semibold">Cancelar</a>
+        <a href="/admin/productos.php" class="rounded-xl bg-slate-100 px-6 py-2.5 text-sm font-semibold text-ink-600 hover:bg-slate-200">Cancelar</a>
     </div>
 </form>
 

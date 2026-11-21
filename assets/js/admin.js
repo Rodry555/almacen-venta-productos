@@ -17,8 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-logout-movil')?.addEventListener('click', logout);
 
     // Menú móvil.
-    document.getElementById('btn-menu')?.addEventListener('click', () => {
-        document.getElementById('menu-movil')?.classList.toggle('hidden');
+    const botonMenu = document.getElementById('btn-menu');
+    const menuMovil = document.getElementById('menu-movil');
+    botonMenu?.addEventListener('click', () => {
+        const abierto = menuMovil?.classList.toggle('hidden') === false;
+        botonMenu.setAttribute('aria-expanded', String(abierto));
+        botonMenu.innerHTML = `<i class="fa-solid fa-${abierto ? 'xmark' : 'bars'}"></i>`;
     });
 
     // Confirmación para acciones destructivas en formularios clásicos.

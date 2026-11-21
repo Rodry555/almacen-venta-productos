@@ -173,10 +173,10 @@ $r = req('GET', '/index.php');
 check('GET /index.php devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Catálogo con reserva previa') !== false, $r['raw']);
 
 $r = req('GET', '/productos.php');
-check('GET /productos.php muestra el catálogo', $r['status'] === 200 && strpos($r['raw'], 'Cuaderno A5') !== false);
+check('GET /productos.php muestra el catálogo', $r['status'] === 200 && strpos($r['raw'], 'Jugo de Manzana Ades 1 L') !== false);
 
 $r = req('GET', '/producto-detalle.php?id=1');
-check('GET /producto-detalle.php?id=1 devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Cuaderno A5') !== false);
+check('GET /producto-detalle.php?id=1 devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Jugo de Manzana Ades 1 L') !== false);
 
 $r = req('GET', '/contacto.php');
 check('GET /contacto.php devuelve 200', $r['status'] === 200);
@@ -206,13 +206,13 @@ check('Dashboard con sesión devuelve 200', $r['status'] === 200 && strpos($r['r
 check('Dashboard NO contiene formularios (solo lectura)', strpos($r['raw'], '<form') === false);
 
 $r = req('GET', '/admin/productos.php');
-check('Listado de productos devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Cuaderno A5') !== false);
+check('Listado de productos devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Jugo de Manzana Ades 1 L') !== false);
 
 $r = req('GET', '/admin/producto-form.php?id=1');
 check('Formulario de edición devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Editar producto') !== false);
 
 $r = req('GET', '/admin/categorias.php');
-check('Listado de categorías devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Papelería') !== false);
+check('Listado de categorías devuelve 200', $r['status'] === 200 && strpos($r['raw'], 'Bebidas') !== false);
 preg_match('/name="csrf-token" content="([^"]+)"/', $r['raw'], $m);
 check('Token CSRF del HTML coincide con la API', ($m[1] ?? '') === $adminToken);
 

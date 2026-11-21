@@ -72,8 +72,8 @@ require_once __DIR__ . '/../includes/admin-header.php';
 
 <div class="grid gap-6 lg:grid-cols-3">
     <!-- Formulario -->
-    <form method="post" action="/admin/categorias.php" class="bg-white rounded-xl shadow-sm p-6 h-fit">
-        <h2 class="text-lg font-bold mb-4">
+    <form method="post" action="/admin/categorias.php" class="h-fit rounded-3xl border border-slate-100 bg-white p-6 shadow-soft">
+        <h2 class="mb-5 font-display text-lg font-bold text-ink-900">
             <?= $editar !== null ? 'Editar categoría' : 'Nueva categoría' ?>
         </h2>
         <?= csrfField() ?>
@@ -84,12 +84,12 @@ require_once __DIR__ . '/../includes/admin-header.php';
             <span class="text-sm font-semibold">Nombre *</span>
             <input name="name" required minlength="2" maxlength="255"
                    value="<?= e($editar['name'] ?? '') ?>"
-                   class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500">
+                   class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
         </label>
         <label class="block mt-4">
             <span class="text-sm font-semibold">Descripción</span>
             <textarea name="description" rows="3" maxlength="5000"
-                      class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500"><?= e($editar['description'] ?? '') ?></textarea>
+                      class="mt-1 w-full rounded-xl border border-slate-200 bg-cream px-4 py-2.5 text-sm outline-none focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100"><?= e($editar['description'] ?? '') ?></textarea>
         </label>
         <label class="flex items-center gap-2 mt-4">
             <input name="is_active" type="checkbox" value="1"
@@ -99,24 +99,24 @@ require_once __DIR__ . '/../includes/admin-header.php';
         </label>
 
         <div class="flex gap-2 mt-6">
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2 rounded-lg">
-                <i class="fa-solid fa-floppy-disk mr-2"></i>Guardar
+            <button type="submit" class="inline-flex items-center gap-2 rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-bold text-white hover:bg-brand-700">
+                <i class="fa-solid fa-floppy-disk"></i> Guardar
             </button>
             <?php if ($editar !== null): ?>
-                <a href="/admin/categorias.php" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 font-semibold">Cancelar</a>
+                <a href="/admin/categorias.php" class="rounded-xl bg-slate-100 px-4 py-2.5 text-sm font-semibold text-ink-600 hover:bg-slate-200">Cancelar</a>
             <?php endif; ?>
         </div>
     </form>
 
     <!-- Listado -->
-    <div class="lg:col-span-2 bg-white rounded-xl shadow-sm p-4 overflow-x-auto">
+    <div class="overflow-x-auto rounded-3xl border border-slate-100 bg-white p-4 shadow-soft lg:col-span-2">
         <table id="tabla-categorias" class="w-full text-sm">
-            <thead class="bg-slate-50 text-slate-500">
+            <thead class="bg-ink-50 text-[11px] uppercase tracking-wider text-ink-500">
                 <tr><th class="text-left p-3">Nombre</th><th class="text-left p-3">Productos</th><th class="text-left p-3">Estado</th><th class="text-left p-3">Acciones</th></tr>
             </thead>
             <tbody>
                 <?php foreach ($categorias as $c): ?>
-                    <tr class="border-t border-slate-100">
+                    <tr class="border-t border-slate-100 hover:bg-cream">
                         <td class="p-3">
                             <p class="font-semibold"><?= e($c['name']) ?></p>
                             <p class="text-xs text-slate-400"><?= e(mb_substr((string) $c['description'], 0, 70)) ?></p>
@@ -129,7 +129,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
                         </td>
                         <td class="p-3">
                             <div class="flex gap-3 items-center">
-                                <a href="/admin/categorias.php?editar=<?= (int) $c['id'] ?>" class="text-blue-600 hover:underline" title="Editar">
+                                <a href="/admin/categorias.php?editar=<?= (int) $c['id'] ?>" class="text-brand-700 hover:underline" title="Editar">
                                     <i class="fa-solid fa-pen"></i>
                                 </a>
                                 <form method="post" action="/admin/categorias.php">

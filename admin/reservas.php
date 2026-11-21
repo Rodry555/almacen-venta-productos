@@ -49,15 +49,15 @@ require_once __DIR__ . '/../includes/admin-header.php';
         $activo = $estado === $clave;
     ?>
         <a href="/admin/reservas.php<?= $clave !== '' ? '?estado=' . $clave : '' ?>"
-           class="px-4 py-2 rounded-full text-sm <?= $activo ? 'bg-slate-800 text-white' : 'bg-white border border-slate-200 hover:bg-slate-100' ?>">
+           class="rounded-full border px-4 py-2 text-sm font-semibold transition <?= $activo ? 'border-brand-600 bg-brand-600 text-white shadow-soft' : 'border-slate-200 bg-white text-ink-600 hover:border-brand-300 hover:text-brand-700' ?>">
             <?= e($etiqueta) ?>
         </a>
     <?php endforeach; ?>
 </div>
 
-<div class="bg-white rounded-xl shadow-sm p-4 overflow-x-auto">
+<div class="overflow-x-auto rounded-3xl border border-slate-100 bg-white p-4 shadow-soft">
     <table id="tabla-reservas" class="w-full text-sm">
-        <thead class="bg-slate-50 text-slate-500">
+        <thead class="bg-ink-50 text-[11px] uppercase tracking-wider text-ink-500">
             <tr>
                 <th class="text-left p-3">ID</th>
                 <th class="text-left p-3">Cliente</th>
@@ -71,7 +71,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
         </thead>
         <tbody>
             <?php foreach ($reservas as $r): ?>
-                <tr class="border-t border-slate-100">
+                <tr class="border-t border-slate-100 hover:bg-cream">
                     <td class="p-3 font-bold">#<?= (int) $r['id'] ?></td>
                     <td class="p-3">
                         <p class="font-semibold"><?= e($r['customer_name']) ?></p>
@@ -88,7 +88,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
                     <td class="p-3 text-slate-400 text-xs"><?= e($r['created_at']) ?></td>
                     <td class="p-3">
                         <a href="/admin/reserva-detalle.php?id=<?= (int) $r['id'] ?>"
-                           class="text-blue-600 hover:underline"><i class="fa-solid fa-eye"></i></a>
+                           class="text-brand-700 hover:underline"><i class="fa-solid fa-eye"></i></a>
                     </td>
                 </tr>
             <?php endforeach; ?>

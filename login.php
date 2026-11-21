@@ -14,41 +14,62 @@ $pageTitle = 'Acceso administrador';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#111d24">
     <meta name="csrf-token" content="<?= e(csrfToken()) ?>">
-    <title><?= e($pageTitle) ?> — Almacén</title>
+    <title><?= e($pageTitle) ?> — Mi Almacén</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <?php require_once __DIR__ . '/includes/tailwind-config.php'; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="/assets/css/custom.css">
 </head>
-<body class="bg-slate-800 min-h-screen flex items-center justify-center p-4">
-    <div class="w-full max-w-md">
-        <div class="text-center text-white mb-6">
-            <i class="fa-solid fa-boxes-stacked text-5xl text-emerald-400"></i>
-            <h1 class="text-2xl font-bold mt-3">Panel de Administración</h1>
-            <p class="text-slate-400 text-sm mt-1">Ingresa con tu cuenta de administrador</p>
+<body class="hero-fondo min-h-screen flex items-center justify-center p-4 text-ink-800">
+    <div class="absolute inset-0 hero-malla opacity-50 pointer-events-none"></div>
+    <div class="relative w-full max-w-md">
+        <div class="text-center text-white mb-7">
+            <span class="w-16 h-16 mx-auto rounded-3xl bg-brand-500 text-ink-950 grid place-items-center text-3xl shadow-lift">
+                <i class="fa-solid fa-basket-shopping"></i>
+            </span>
+            <h1 class="mt-5 font-display text-3xl font-extrabold">Panel de administración</h1>
+            <p class="text-slate-400 text-sm mt-2">Ingresa con tu cuenta para gestionar el almacén.</p>
         </div>
 
-        <form id="form-login" class="bg-white rounded-2xl shadow-xl p-8">
+        <form id="form-login" class="rounded-3xl border border-white/60 bg-white p-7 shadow-lift sm:p-9">
             <?= csrfField() ?>
+            <div class="mb-6 flex items-center gap-3 border-b border-slate-100 pb-5">
+                <span class="w-10 h-10 rounded-2xl bg-brand-50 text-brand-600 grid place-items-center"><i class="fa-solid fa-lock"></i></span>
+                <div>
+                    <h2 class="font-display text-lg font-bold text-ink-900">Iniciar sesión</h2>
+                    <p class="text-xs text-ink-500">Solo personal autorizado.</p>
+                </div>
+            </div>
+
             <label class="block">
-                <span class="text-sm font-semibold text-slate-700">Email</span>
-                <input id="login-email" type="email" required autocomplete="username"
-                       value="admin@gmail.com"
-                       class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <span class="text-sm font-semibold text-ink-800">Email</span>
+                <div class="relative mt-2">
+                    <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-ink-400"></i>
+                    <input id="login-email" type="email" required autocomplete="username"
+                           value="admin@gmail.com"
+                           class="w-full rounded-xl border border-slate-200 bg-cream py-3 pl-11 pr-4 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
+                </div>
             </label>
-            <label class="block mt-4">
-                <span class="text-sm font-semibold text-slate-700">Contraseña</span>
-                <input id="login-password" type="password" required autocomplete="current-password"
-                       class="mt-1 w-full border border-slate-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <label class="block mt-5">
+                <span class="text-sm font-semibold text-ink-800">Contraseña</span>
+                <div class="relative mt-2">
+                    <i class="fa-solid fa-key absolute left-4 top-1/2 -translate-y-1/2 text-ink-400"></i>
+                    <input id="login-password" type="password" required autocomplete="current-password"
+                           placeholder="Tu contraseña"
+                           class="w-full rounded-xl border border-slate-200 bg-cream py-3 pl-11 pr-4 text-sm outline-none transition focus:border-brand-400 focus:bg-white focus:ring-4 focus:ring-brand-100">
+                </div>
             </label>
             <button id="btn-login" type="submit"
-                    class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg">
+                    class="mt-7 w-full rounded-xl bg-brand-600 py-3.5 font-bold text-white shadow-soft transition hover:bg-brand-700 active:scale-[0.99]">
                 <i class="fa-solid fa-right-to-bracket mr-2"></i> Ingresar
             </button>
         </form>
 
-        <p class="text-center text-slate-500 text-xs mt-6">
-            <a href="/index.php" class="hover:text-white">← Volver al catálogo</a>
+        <p class="text-center text-slate-400 text-xs mt-6">
+            <a href="/index.php" class="hover:text-brand-300 transition"><i class="fa-solid fa-arrow-left mr-2"></i>Volver al catálogo</a>
         </p>
     </div>
 

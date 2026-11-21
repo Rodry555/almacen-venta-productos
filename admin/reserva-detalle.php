@@ -13,7 +13,7 @@ if ($reserva === false) {
     $pageTitle = 'Reserva no encontrada';
     require_once __DIR__ . '/../includes/admin-header.php';
     ?>
-    <div class="bg-white rounded-xl shadow-sm p-10 text-center">
+    <div class="rounded-3xl border border-slate-100 bg-white p-10 text-center shadow-soft">
         <h2 class="text-xl font-bold">Reserva no encontrada</h2>
         <a href="/admin/reservas.php" class="inline-block mt-4 text-blue-600 hover:underline">Volver al listado</a>
     </div>
@@ -76,13 +76,15 @@ require_once __DIR__ . '/../includes/admin-header.php';
 ?>
 
 <div class="mb-6">
-    <a href="/admin/reservas.php" class="text-sm text-blue-600 hover:underline">← Volver a reservas</a>
+    <a href="/admin/reservas.php" class="inline-flex items-center gap-2 text-sm font-semibold text-brand-700 hover:underline">
+        <i class="fa-solid fa-arrow-left"></i> Volver a reservas
+    </a>
 </div>
 
 <div class="grid gap-6 lg:grid-cols-3">
     <div class="lg:col-span-2 space-y-6">
         <!-- Datos del cliente -->
-        <section class="bg-white rounded-xl shadow-sm p-6">
+        <section class="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="font-bold text-lg">Datos del cliente</h2>
                 <span class="px-3 py-1 rounded text-sm <?= $estilosEstado[$reserva['status']] ?? 'bg-slate-100' ?>">
@@ -100,7 +102,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
         </section>
 
         <!-- Productos reservados -->
-        <section class="bg-white rounded-xl shadow-sm p-6">
+        <section class="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft">
             <h2 class="font-bold text-lg mb-4">Productos reservados</h2>
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
@@ -133,7 +135,7 @@ require_once __DIR__ . '/../includes/admin-header.php';
     </div>
 
     <!-- Cambio de estado -->
-    <aside class="bg-white rounded-xl shadow-sm p-6 h-fit">
+    <aside class="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft h-fit">
         <h2 class="font-bold text-lg mb-2">Cambiar estado</h2>
         <p class="text-xs text-slate-500 mb-5">
             El stock se apartó al crear la reserva. Solo cancelar lo devuelve.

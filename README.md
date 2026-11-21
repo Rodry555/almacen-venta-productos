@@ -1,7 +1,7 @@
 # Sistema de Almacén y Venta de Productos
 
 Catálogo público con carrito de **reservas** (sin pagos online) y panel de administración.
-**Sistema completo implementado (Fases 0 a 5).** Suite smoke verificada: 52 pruebas, 0 fallos.
+**Sistema completo implementado (Fases 0 a 5).** Incluye una suite smoke que se ejecuta dentro del contenedor web.
 
 ## Requisitos
 
@@ -45,6 +45,18 @@ docker compose up -d --build
 
 Productos y categorías se guardan con **formularios PHP clásicos** (POST a la misma página,
 validación en servidor, PRG con mensaje flash). Reservas, estados, stock y login usan la API JSON.
+
+## Catálogo inicial
+
+`database/seed.sql` reemplaza los datos de ejemplo por **8 categorías** (Bebidas & Licores,
+Despensa & Abarrotes, Lácteos, Café/Té/Mate, Limpieza del Hogar, Congelados, Bebés y Mascotas)
+y **60 productos** cargados solo con su **nombre** y su categoría.
+
+Todavía no hay fotos ni precios reales: las tarjetas muestran un contenedor placeholder con el
+icono de la categoría y el texto «A consultar» en lugar de un `$0.00` engañoso. En la base de datos
+`price = 0.00` y `stock = 20` son valores provisionales para que el flujo de reservas siga
+funcionando; puedes completarlos desde el panel de administración. Las imágenes se pueden subir
+después desde `/admin/producto-form.php` (Cloudinary).
 
 ### Pruebas smoke
 

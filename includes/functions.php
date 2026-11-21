@@ -117,3 +117,19 @@ function flashLeer(): array
     unset($_SESSION['flash']);
     return is_array($flash) ? $flash : [];
 }
+
+/**
+ * Precio para el catálogo público. Mientras no se cargue el precio real
+ * (seed con price = 0.00) se muestra "A consultar" en lugar de un $0.00 engañoso.
+ */
+function etiquetaPrecio($valor): string
+{
+    $precio = (float) $valor;
+    return $precio > 0 ? '$' . number_format($precio, 2) : 'A consultar';
+}
+
+/** Disponibilidad legible para el catálogo público. */
+function etiquetaDisponibilidad($stock): string
+{
+    return (int) $stock > 0 ? 'Consultar disponibilidad' : 'Agotado temporalmente';
+}
